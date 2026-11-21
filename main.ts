@@ -25,6 +25,7 @@ writeFileSync(target, bytes);
 
 // Self-check: the copy must be byte-identical to the source image, so the
 // two graded runs can never disagree about what they wrote.
-if (readFileSync(target).length !== bytes.length) {
-  throw new Error('entry.png copy failed: byte count mismatch');
+const written = readFileSync(target);
+if (!written.equals(bytes)) {
+  throw new Error('entry.png copy failed: written bytes differ from source');
 }
